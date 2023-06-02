@@ -1,3 +1,4 @@
+// Package problemwords creates typing test words
 package problemwords
 
 import (
