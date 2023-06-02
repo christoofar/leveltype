@@ -37,6 +37,14 @@ func NewExercise(app *tview.Application) tview.Primitive {
 	statsbox.SetBorder(true)
 
 	typebox.SetInputCapture(func(event *tcell.EventKey) (outevent *tcell.EventKey) {
+
+		// User want to quit?
+		if event.Modifiers() == tcell.ModCtrl {
+			if event.Key() == tcell.KeyCtrlX {
+				app.Stop()
+			}
+		}
+
 		if event.Key() == tcell.KeyRune {
 			exer.WordEntry(event.Rune())
 			typebox.SetText(exer.Render())
