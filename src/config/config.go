@@ -84,8 +84,6 @@ func SaveVocabularyLevel(level int) {
 		// There was no config file read, so provide a default
 		config.VocabularyLevel = 20
 	}
-	println("current level", config.VocabularyLevel)
-
 	config.VocabularyLevel = level
 
 	if config.VocabularyLevel == 0 {
