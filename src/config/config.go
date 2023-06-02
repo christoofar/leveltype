@@ -18,8 +18,7 @@ type Config struct {
 }
 
 func (e *Config) SaveConfiguration() {
-	dirroot = configdir.LocalConfig("leveltype")
-	configpath = dirroot + "/config.yaml"
+	ResolvePaths()
 
 	_, err := os.Stat(dirroot)
 	if os.IsNotExist(err) {
@@ -48,8 +47,7 @@ func (e *Config) SaveConfiguration() {
 }
 
 func (e *Config) ReadConfiguration() {
-	dirroot = configdir.LocalConfig("leveltype")
-	configpath = dirroot + "/config.yaml"
+	ResolvePaths()
 
 	_, err := os.Stat(dirroot)
 	if os.IsNotExist(err) {
@@ -69,7 +67,13 @@ func (e *Config) ReadConfiguration() {
 	problemwords.ListSize = e.VocabularyLevel
 }
 
+func ResolvePaths() {
+	dirroot = configdir.LocalConfig("leveltype")
+	configpath = dirroot + "/config.yaml"
+}
+
 func SaveVocabularyLevel(level int) {
+	ResolvePaths()
 
 	config := Config{}
 	d, err := os.ReadFile(configpath)
@@ -80,14 +84,17 @@ func SaveVocabularyLevel(level int) {
 		// There was no config file read, so provide a default
 		config.VocabularyLevel = 20
 	}
-
-	d, err = yaml.Marshal(config)
+	println("current level", config.VocabularyLevel)
 
 	config.VocabularyLevel = level
+	println("trying to save level", config.VocabularyLevel)
 	if config.VocabularyLevel == 0 {
 		config.VocabularyLevel = 20
 	}
-	if err != nil {
+
+	d, err = yaml.Marshal(config)
+
+	if err == nil {
 		err = os.WriteFile(configpath, d, 0755)
 		if err != nil {
 			panic(err)
