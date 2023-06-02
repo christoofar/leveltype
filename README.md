@@ -13,7 +13,7 @@ the spacegram is the sequence `to_far`
 
 Spacegrams can be thought of as their own words.  In the lowercase Latin characterset (and accounting for the apostrophe), there are a staggering 11,142,400 possible spacegrams!
 
-Luckily only a small portion of possible spacegrams regularly occur in English.  As you make typing errors, the word that you typed correctly before the typo is brought back for you to retype.   As you perfect your muscle memory on a problem word, the "entry word" that came before you made a typo as well as a selection of random words are given to you.
+Luckily only a small portion of possible spacegrams regularly occur in English.  As you make typing errors, the word that you typed correctly before the typo is brought back for you to retype.   As you perfect your muscle memory on a problem word, the "entry word" that came before you made a typo as well as a selection of random words are given to you so that you learn the spacegram as well as the word that you mistyped.
 
 Perfecting the spacegrams that lead into your typos is how you gain more "flow" as you type.
 
