@@ -65,6 +65,10 @@ func (e *Exercise) WordEntry(char rune) {
 		e.CurText += string(char)
 	}
 
+	if unicode.IsPunct(char) {
+		e.CurText += string(char)
+	}
+
 }
 
 // Called to close out the exercize in progress and tally-up the wrong words
