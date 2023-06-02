@@ -3,13 +3,13 @@ package config
 import (
 	"os"
 
+	"github.com/kirsle/configdir"
 	"github.com/leveltype/src/problemwords"
 	"gopkg.in/yaml.v3"
 )
 
 var (
-	dir        = ""
-	dirroot    = "/.config/leveltype"
+	dirroot    = ""
 	configpath = ""
 )
 
@@ -18,13 +18,12 @@ type Config struct {
 }
 
 func (e *Config) SaveConfiguration() {
-	dir, _ = os.UserHomeDir()
-	dir += dirroot
-	configpath = dir + "/config.yaml"
+	dirroot = configdir.LocalConfig("leveltype")
+	configpath = dirroot + "/config.yaml"
 
-	_, err := os.Stat(dir)
+	_, err := os.Stat(dirroot)
 	if os.IsNotExist(err) {
-		if err = os.Mkdir(dir, 0755); err != nil {
+		if err = os.MkdirAll(dirroot, 0755); err != nil {
 			panic(err)
 		}
 	}
@@ -38,6 +37,7 @@ func (e *Config) SaveConfiguration() {
 	// set defaults
 	if e.VocabularyLevel == 0 {
 		e.VocabularyLevel = 20
+		d, _ = yaml.Marshal(e)
 	}
 
 	err = os.WriteFile(configpath, d, 0755)
@@ -48,9 +48,15 @@ func (e *Config) SaveConfiguration() {
 }
 
 func (e *Config) ReadConfiguration() {
-	dir, _ = os.UserHomeDir()
-	dir += dirroot
-	configpath = dir + "/config.yaml"
+	dirroot = configdir.LocalConfig("leveltype")
+	configpath = dirroot + "/config.yaml"
+
+	_, err := os.Stat(dirroot)
+	if os.IsNotExist(err) {
+		if err = os.MkdirAll(dirroot, 0755); err != nil {
+			panic(err)
+		}
+	}
 
 	d, err := os.ReadFile(configpath)
 	if err != nil { // There is no config file, so make one.
@@ -78,8 +84,11 @@ func SaveVocabularyLevel(level int) {
 	d, err = yaml.Marshal(config)
 
 	config.VocabularyLevel = level
+	if config.VocabularyLevel == 0 {
+		config.VocabularyLevel = 20
+	}
 	if err != nil {
-		err = os.WriteFile("~/.config/leveltype/config.yaml", d, os.ModeAppend)
+		err = os.WriteFile(configpath, d, 0755)
 		if err != nil {
 			panic(err)
 		}
