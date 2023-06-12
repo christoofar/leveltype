@@ -39,6 +39,11 @@ func WordList() string {
 	if err != nil {
 		panic("Missing dictionary in load path.  Where is e10000.txt?")
 	}
+	filewords := strings.Split(string(vocab), "\n")
+	filecount := len(filewords)
+	if ListSize > filecount {
+		return strings.Join(filewords, "\n")
+	}
 	return strings.Join(strings.Split(string(vocab), "\n")[:ListSize], " ")
 }
 
