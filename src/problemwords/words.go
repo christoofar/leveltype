@@ -41,10 +41,14 @@ func WordList() string {
 	}
 	filewords := strings.Split(string(vocab), "\n")
 	filecount := len(filewords)
+
 	if ListSize > filecount {
 		return strings.Join(filewords, " ")
 	}
-	return strings.Join(filewords, " ")[:ListSize]
+
+	var reducedlist = strings.Join(filewords[:ListSize], " ")
+
+	return reducedlist
 }
 
 // Looks in PWords for a problem word that the user needs to focus on
