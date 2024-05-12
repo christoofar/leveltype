@@ -40,3 +40,5 @@ leveltype/cmd #  go run main.go
 - Packaging CI/CD
 
 [go sdk]: https://go.dev/dl/
+
+testing mirror push
