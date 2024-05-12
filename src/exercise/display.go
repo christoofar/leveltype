@@ -45,6 +45,14 @@ func NewExercise(app *tview.Application) tview.Primitive {
 			}
 		}
 
+		// User wants to start over
+		if event.Key() == tcell.KeyTab {
+			exer.StartOver()
+			exer.WordEntry(event.Rune())
+			typebox.SetText(exer.Render())
+			statsbox.SetText(exer.RenderStats())
+		}
+
 		if event.Key() == tcell.KeyRune {
 			exer.WordEntry(event.Rune())
 			typebox.SetText(exer.Render())

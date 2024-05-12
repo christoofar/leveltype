@@ -49,6 +49,16 @@ func (e *Exercise) Load(words string) {
 	}
 }
 
+// Starts the lesson over (because the user problably hit the TAB key)
+func (e *Exercise) StartOver() {
+	e.CurIdx = 0
+	e.CurText = ""
+	for i := range e.WrongWord {
+		e.WrongWord[i] = false
+	}
+	e.Render()
+}
+
 // WordEntry deals with each typechar and checks to see if a typo was made
 func (e *Exercise) WordEntry(char rune) {
 	if e.WordStart[e.CurIdx].IsZero() {
@@ -68,7 +78,6 @@ func (e *Exercise) WordEntry(char rune) {
 	if unicode.IsPunct(char) {
 		e.CurText += string(char)
 	}
-
 }
 
 // Called to close out the exercize in progress and tally-up the wrong words
