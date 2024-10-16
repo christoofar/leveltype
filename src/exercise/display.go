@@ -1,9 +1,10 @@
 package exercise
 
 import (
+	"github.com/gdamore/tcell/v2"
 	"strconv"
 
-	"github.com/gdamore/tcell/v2"
+	_ "github.com/gdamore/tcell/v2"
 	"github.com/leveltype/src/problemwords"
 	"github.com/rivo/tview"
 )
