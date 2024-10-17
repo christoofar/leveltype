@@ -65,7 +65,10 @@ func (e *Exercise) WordEntry(char rune) {
 		e.WordStart[e.CurIdx] = time.Now()
 	}
 
-	if char == ' ' {
+	if char == ' ' || (e.CurIdx == e.WordCount-1 && len(e.CurText) == len(e.Words[e.CurIdx])-1) {
+		if char != ' ' {
+			e.CurText += string(char)
+		}
 		e.LastEntry = e.CurText
 		e.Advance()
 		return
