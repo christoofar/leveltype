@@ -35,7 +35,17 @@ Install the [Go SDK][go sdk]
 leveltype/cmd #  go run main.go
 ```
 
+## Where Does LevelType keep its configs and dictionary?
+On Linux and Mac the config is located in `~/.config/leveltype/config.yaml`
+
+On Windows it's located in `%APPDATA%/leveltype/config.yaml`, usually this will be `C:\Users\yourname\AppData\Roaming\leveltype\config.yaml`
+
+The dictionary is next to the `main.go` code file as `e10000.txt`
+
+I don't recommend that you change the vocabulary setting in the config, other than to lower it back down if you'd like to-retrain the most frequent words.  It's highly-not recommended that you inflate the number.  If you just recently hopped keyboard layouts then it will be nearly 1 year before you are truly efficient at the top 10,000 words, much less the spacegrams.   Resist the temptation to raise the vocabulary level!
+
 ## TODOs
+- Internationalization (i18n) support in the dictionary
 - Makefile
 - Packaging CI/CD
 
