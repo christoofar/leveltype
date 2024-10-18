@@ -1,9 +1,10 @@
 package exercise
 
 import (
+	"github.com/gdamore/tcell/v2"
 	"strconv"
 
-	"github.com/gdamore/tcell/v2"
+	_ "github.com/gdamore/tcell/v2"
 	"github.com/leveltype/src/problemwords"
 	"github.com/rivo/tview"
 )
@@ -76,6 +77,9 @@ func NewExercise(app *tview.Application) tview.Primitive {
 			}
 		} else if len(currentSelection) > 0 {
 			index, _ := strconv.Atoi(currentSelection[0])
+			if numSelections == 0 {
+				return
+			}
 			if key == tcell.KeyTab {
 				index = (index + 1) % numSelections
 			} else if key == tcell.KeyBacktab {
